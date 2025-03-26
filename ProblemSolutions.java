@@ -8,6 +8,7 @@
  *
  ********************************************************************/
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 class ProblemSolutions {
@@ -32,9 +33,27 @@ class ProblemSolutions {
 
     public boolean isSubset(int list1[], int list2[]) {
 
+        boolean isSubset = false;
+        HashSet<Integer> newHashSetA = new HashSet<>();
+        //For each Loop
+        for(int set1: list1){
+            //Adds the values in the hashset
+            newHashSetA.add(set1);
+
+        }
+        //For eachloop
+        for(int set1: list2){
+            //Checks if the the heshset dosent contain the values in set1
+            if(!newHashSetA.contains(set1)){
+                //Returns false
+                return isSubset;
+            }
+
+        }
+
         // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
 
-        return false;
+        return true;
     }
 
 
@@ -52,10 +71,22 @@ class ProblemSolutions {
      */
 
     public int findKthLargest(int[] array, int k) {
-
-        // ADD YOUR CODE HERE
-
-        return 0;
+        //New Priority Queue
+        PriorityQueue<Integer> newQueue = new PriorityQueue<>();
+        int newRoot = 0;
+        //For each loop
+        for(int nums: array){
+            //Gets added in the newQueue
+                newQueue.add(nums);
+            }
+            //Then it checks while the queue size is greater greater or equal to k
+            while(newQueue.size() >= k){
+                //Then we pull the element out of the queue and outs it in variable.
+                    newRoot = newQueue.poll();
+                
+            }
+            
+        return newRoot; 
     }
 
 
@@ -73,10 +104,29 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
-
-        // ADD YOU CODE HERE
-
-        return null;
+        // New Hashset
+       HashSet<Integer> tempArray = new HashSet<>();
+       //For each loop that adds in the hashset
+       for(int nums: array1){
+        tempArray.add(nums);
+       }
+       //Same thing but for the second array
+       for(int nums2: array2){
+        tempArray.add(nums2);
+       }
+       //Then we make and array list and add the hashset in array 
+       ArrayList<Integer> array = new ArrayList<>(tempArray);
+       //We call the Java Collection 
+       Collections.sort(array);
+       //Then we make a new array
+       int[] finalArray = new int[array.size()];
+       //We go through the loop
+       for(int i = 0; i < array.size(); i++){
+        //And we add the inputs in the final array
+        finalArray[i] = array.get(i);
+       }
+        
+        return finalArray;
     }
 
 }

@@ -354,6 +354,8 @@ public class Main {
         values.add("BB");
         if ( ! cuckooFailure && ! values.equals( table.values() ) ) {
             cuckooFailure = true;
+            System.out.println("ACTUAL  : " + table.values());
+            System.out.println("EXPECTED: " + values);
             System.out.println("Error 21: Test Failure);");
         }
 
@@ -376,7 +378,7 @@ public class Main {
         CuckooHash<String, String> table2 = new CuckooHash<String, String>(10);
         hashset1.clear(); // reuse the hashset from earlier.
 
-
+        // TODO: BRING BACK THESE TESTS
         for (int i = 0 ; i < 32000 ; i++ ) {
             String string = bf1.randomString(random);
             table2.put(string, string);

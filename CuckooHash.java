@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Matija Bebek / Section 001
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -245,10 +245,44 @@ public class CuckooHash<K, V> {
 	 */
 
  	public void put(K key, V value) {
-
-		// ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME AT TOP OF FILE.
-		// Also make sure you read this method's prologue above, it should help
-		// you. Especially the two HINTS in the prologue.
+		// this adds the hash1 key in variable 
+		int hash = hash1(key);
+		//this checks for duplicates
+		if (table[hash] != null && table[hash].getBucKey().equals(key) && table[hash].getValue().equals(value)) {
+			//Return if there is.
+			return;
+		}
+		
+		for(int i = 0; i < CAPACITY; i++){
+			//Checks if key is null
+			if (table[hash] == null) {
+				//If it is it makes a new bucket with a key and value.
+				table[hash] = new Bucket<>(key, value);
+				//And return it
+				return;
+			}
+			//This save the previous key and value.
+			K previousKey = table[hash].getBucKey();
+			V previousValue = table[hash].getValue();
+			//We now kick out the old key, value pair and add new ones. 
+			table[hash] = new Bucket<>(key, value);
+			//Sets the previous key value pair for insertion. 
+			key = previousKey;
+			value = previousValue;
+			
+			//Checks if it is the same as current hash.
+			if (hash1(key) == hash) {
+				//Swaps to hash hash2
+				hash = hash2(key);
+			} else {
+				//Swaps to hash1
+				hash = hash1(key);
+			}
+		}
+		//Rehahses if for loop is completed
+		rehash();
+		//Recursivly call the put method. 
+		put(key, value);
 
 		return;
 	}
